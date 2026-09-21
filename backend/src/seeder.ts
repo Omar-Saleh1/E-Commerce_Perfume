@@ -8,284 +8,542 @@ import { User } from './models/User';
 import { Order } from './models/Order';
 
 const categories = [
-  { name: "Electronics", slug: "electronics", description: "Smartphones, laptops, monitors & high-performance computing gadgets", icon: "Laptop" },
-  { name: "Audio & Acoustics", slug: "audio-acoustics", description: "Studio ANC headphones, wireless speakers & spatial audio DACs", icon: "Headphones" },
-  { name: "Fashion & Lifestyle", slug: "fashion-lifestyle", description: "Minimalist urban streetwear, titanium eyewear & premium accessories", icon: "Shirt" },
-  { name: "Home & Living", slug: "home-living", description: "Smart interior lighting, barista espresso systems & ergonomic desk gear", icon: "Home" },
-  { name: "Gaming & VR", slug: "gaming-vr", description: "Pro mechanical keyboards, ultra-fast mice & next-gen spatial headsets", icon: "Gamepad" }
+  { name: "Woody & Earthy", slug: "woody-earthy", description: "Rich sandalwood, aged cedarwood, smoky birch and earthy vetiver accords", icon: "TreePine" },
+  { name: "Floral & Botanical", slug: "floral-botanical", description: "Grasse Rose de Mai, midnight jasmine, radiant neroli and French orris", icon: "Flower2" },
+  { name: "Amber & Resin", slug: "amber-resin", description: "Opulent golden amber, raw benzoin, sacred incense and Madagascar vanilla", icon: "Flame" },
+  { name: "Citrus & Solar", slug: "citrus-solar", description: "Sparkling Calabrian bergamot, green petitgrain, sea salt and solar blooms", icon: "Sun" },
+  { name: "Gourmand & Spices", slug: "gourmand-spices", description: "Toasted almond, saffron, roasted tonka bean and rich Bourbon vanilla", icon: "Sparkles" }
 ];
 
 const coupons = [
-  { code: "SAVE10", discountType: "percentage", discountValue: 10, minOrderAmount: 50, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) },
-  { code: "WELCOME20", discountType: "percentage", discountValue: 20, minOrderAmount: 100, maxDiscountAmount: 60, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) },
-  { code: "CASH30", discountType: "fixed", discountValue: 30, minOrderAmount: 200, expiresAt: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000) },
-  { code: "PRIME50", discountType: "fixed", discountValue: 50, minOrderAmount: 350, expiresAt: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000) },
-  { code: "CYBER25", discountType: "percentage", discountValue: 25, minOrderAmount: 150, maxDiscountAmount: 80, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) }
+  { code: "ODORATUS10", discountType: "percentage", discountValue: 10, minOrderAmount: 150, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) },
+  { code: "SOLSTICE20", discountType: "percentage", discountValue: 20, minOrderAmount: 250, maxDiscountAmount: 80, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) },
+  { code: "ATELIER30", discountType: "fixed", discountValue: 30, minOrderAmount: 300, expiresAt: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000) },
+  { code: "HAUTE50", discountType: "fixed", discountValue: 50, minOrderAmount: 500, expiresAt: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000) },
+  { code: "VIP10", discountType: "percentage", discountValue: 10, minOrderAmount: 100, maxDiscountAmount: 50, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) }
 ];
 
 const products = [
   {
-    name: "Aura Pro Wireless ANC Studio Headphones",
-    slug: "aura-pro-wireless-anc-headphones",
-    category: "Audio & Acoustics",
-    brand: "Sony / Aura",
-    price: 189.99,
-    oldPrice: 249.99,
+    name: "Santal Parchment",
+    subtitle: "Australian Sandalwood • Tuscan Leather • French Orris",
+    slug: "santal-parchment",
+    category: "Woody & Earthy",
+    archetype: "Woody",
+    concentration: "Extrait de Parfum (30% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 280,
+    oldPrice: 320,
     rating: 4.9,
-    reviewsCount: 42,
-    stock: 24,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
-    description: "Flagship hybrid active noise cancelling headphones with custom 40mm beryllium drivers, lossless spatial audio, and 45-hour ultra endurance battery.",
-    features: ["Hybrid Active Noise Cancellation (45dB)", "45-Hour Battery Life with USB-C Fast Charge", "Lossless Hi-Res Audio & Bluetooth 5.3", "Ultra-soft Memory Foam Cushions"],
-    isFeatured: true,
-    reviews: [
-      { name: "Alex Mercer", rating: 5, comment: "Insane soundstage and unbelievable noise cancelling. Best tech purchase this year!" },
-      { name: "Sarah Jenkins", rating: 5, comment: "Pure luxury feel. The battery truly lasts all week on a single charge." }
-    ]
-  },
-  {
-    name: "Titanium Cyber Chrono Smartwatch Ultra",
-    slug: "titanium-cyber-chrono-smartwatch",
-    category: "Electronics",
-    brand: "Nexus",
-    price: 299.99,
-    oldPrice: 399.99,
-    rating: 4.8,
-    reviewsCount: 56,
+    reviewsCount: 54,
     stock: 18,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
-    description: "Grade-5 aerospace titanium smartwatch with Always-On Sapphire AMOLED display, dual-frequency GPS, and medical-grade bio-sensors.",
-    features: ["Grade-5 Titanium & Sapphire Crystal", "100m Water Resistance (10 ATM)", "Continuous ECG & Blood Oxygen Monitoring", "Up to 14 Days Battery Life"],
+    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "An evocative olfactory homage to ancient manuscript ateliers. Opening with dry cardamom and sparkling Italian bergamot, descending into a velvety heart of Florentine orris and warm leather, anchored on creamy sustainable Australian sandalwood.",
+    features: [
+      "30% Extrait Concentration for 16+ Hours Sillage",
+      "Sustainably Distilled Australian Sandalwood",
+      "Includes 2 Complimentary 2ml Discovery Vials",
+      "Handcrafted Heavy-Weighted Smoked Flacon"
+    ],
+    notes: {
+      top: ["Italian Bergamot", "Pink Peppercorn", "Guatemala Cardamom"],
+      heart: ["Florentine Orris Butter", "Tuscan Leather", "Cedar Needles"],
+      base: ["Australian Sandalwood", "Virginia Cedarwood", "Grey Ambergris"]
+    },
     isFeatured: true,
     reviews: [
-      { name: "David Kim", rating: 5, comment: "Sleek, futuristic, and battery lasts forever compared to Apple Watch." }
+      { name: "Elena Rostova", rating: 5, comment: "The drydown is breathtaking. Creamy sandalwood with a refined papery leather touch." },
+      { name: "Henri de Beaufort", rating: 5, comment: "Pure masterclass in perfumery. Sillage lasts from sunrise to deep evening." }
     ]
   },
   {
-    name: "Luminary 4K OLED Ultra-Wide Curved Monitor 34-Inch",
-    slug: "luminary-4k-oled-curved-monitor",
-    category: "Electronics",
-    brand: "Samsung / Nexus",
-    price: 649.99,
-    oldPrice: 799.99,
+    name: "Velvet Noir Fumé",
+    subtitle: "Smoked Birch • Black Frankincense • Ambergris",
+    slug: "velvet-noir-fume",
+    category: "Amber & Resin",
+    archetype: "Smoky",
+    concentration: "Extrait de Parfum (32% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 320,
+    oldPrice: 360,
     rating: 5.0,
-    reviewsCount: 68,
-    stock: 8,
-    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&auto=format&fit=crop&q=80",
-    description: "34-inch QD-OLED 1800R curved gaming & productivity display with 240Hz refresh rate, 0.03ms response time, and 99.3% DCI-P3 color gamut.",
-    features: ["34-Inch QD-OLED Panel (3440 x 1440)", "240Hz Refresh Rate & 0.03ms Response", "USB-C 90W Power Delivery Hub", "Ambient Glow RGB Rear Backlight"],
-    isFeatured: true,
-    reviews: [
-      { name: "Marcus Vance", rating: 5, comment: "Incredible color accuracy and deep ink blacks. Game changer for creative workflow." }
-    ]
-  },
-  {
-    name: "CyberSound Waterproof 360 Spatial Speaker",
-    slug: "cybersound-waterproof-360-speaker",
-    category: "Audio & Acoustics",
-    brand: "JBL",
-    price: 79.99,
-    oldPrice: 99.99,
-    rating: 4.7,
-    reviewsCount: 31,
-    stock: 35,
-    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&auto=format&fit=crop&q=80",
-    description: "360-degree omnidirectional acoustic speaker with dual neodymium bass radiators, IPX7 waterproof rating, and ambient RGB illumination.",
-    features: ["IPX7 Submersible Waterproof", "360° Omnidirectional Room-filling Sound", "Dual Pass Radiators for Deep Bass", "18-Hour Continuous Playtime"],
-    isFeatured: true,
-    reviews: []
-  },
-  {
-    name: "Barista Touch Espresso Machine & Grinder",
-    slug: "barista-touch-espresso-machine",
-    category: "Home & Living",
-    brand: "DeLonghi",
-    price: 349.99,
-    oldPrice: 429.99,
-    rating: 4.9,
-    reviewsCount: 22,
+    reviewsCount: 38,
     stock: 12,
-    image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=800&auto=format&fit=crop&q=80",
-    description: "Precision 15-bar Italian thermo-block espresso system with integrated conical burr grinder and micro-foam steam wand for artisan coffee.",
-    features: ["15-Bar Italian High-Pressure Pump", "Integrated Conical Burr Grinder (15 Settings)", "Micro-foam Commercial Steam Wand", "1.8L Removable Water Reservoir"],
-    isFeatured: true,
-    reviews: []
-  },
-  {
-    name: "AirFlow Velocity Pro Carbon Running Shoes",
-    slug: "airflow-velocity-pro-running-shoes",
-    category: "Fashion & Lifestyle",
-    brand: "Nike / Velocity",
-    price: 139.99,
-    oldPrice: 179.99,
-    rating: 4.8,
-    reviewsCount: 47,
-    stock: 40,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80",
-    description: "Carbon-fiber plate ultra-responsive marathon runners featuring nitrogen-infused cushioning and seamless breathable mesh upper.",
-    features: ["Full-length Carbon Fiber Energy Plate", "Nitrogen-infused Cushioning Foam", "Seamless Breathable Engineered Knit", "Durable All-weather Traction Rubber"],
-    isFeatured: true,
-    reviews: []
-  },
-  {
-    name: "Minimalist Ergonomic Desk LED Lamp & Wireless Charger",
-    slug: "minimalist-ergonomic-desk-lamp",
-    category: "Home & Living",
-    brand: "Xiaomi",
-    price: 49.99,
-    oldPrice: 65.00,
-    rating: 4.6,
-    reviewsCount: 19,
-    stock: 50,
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&auto=format&fit=crop&q=80",
-    description: "Precision aluminum architectural desk lamp with 5 color temperatures, step-less dimming, and 15W MagSafe wireless charging base.",
-    features: ["15W Integrated Fast Wireless Charger", "5 Color Temperatures & Stepless Dimming", "Zero Blue Light Eye-Protection Standard", "Solid Anodized Aluminum Construction"],
-    isFeatured: false,
-    reviews: []
-  },
-  {
-    name: "Aviator Titanium Polarized Sunglasses UV400",
-    slug: "aviator-titanium-polarized-sunglasses",
-    category: "Fashion & Lifestyle",
-    brand: "Ray-Ban",
-    price: 89.99,
-    oldPrice: 119.99,
-    rating: 4.7,
-    reviewsCount: 29,
-    stock: 30,
-    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&auto=format&fit=crop&q=80",
-    description: "Ultralight aerospace titanium sunglasses with 9-layer HD polarized optics and complete UV400 hydrophobic coating.",
-    features: ["100% UV400 & Glare-Blocking Polarization", "Ultralight 16g Titanium Frame", "Hydrophobic & Scratch-Resistant Coating", "Includes Leather Case & Cleaning Cloth"],
-    isFeatured: false,
-    reviews: []
-  },
-  {
-    name: "CyberDeck 75 Custom Wireless Mechanical Keyboard",
-    slug: "cyberdeck-75-custom-mechanical-keyboard",
-    category: "Gaming & VR",
-    brand: "Keychron / Nexus",
-    price: 159.99,
-    oldPrice: 199.99,
-    rating: 4.9,
-    reviewsCount: 34,
-    stock: 20,
-    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop&q=80",
-    description: "Gasket-mounted CNC aluminum 75% mechanical keyboard with customizable OLED mini-display, pre-lubed linear switches, and hot-swap PCB.",
-    features: ["CNC Anodized Aluminum Chassis", "Built-in OLED Smart Screen & Rotary Knob", "Tri-Mode Connectivity (2.4GHz / BT 5.2 / Type-C)", "Sound-Dampening Silicone & Poron Foam"],
+    image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "Mysterious and regal. A nocturnal journey through dark cathedral woods and ancient incense braziers. Smoked Russian birch blends with black pepper, resinous elemi, and dark amber for an intoxicating trail.",
+    features: [
+      "Rich Smoked Birch & Somalian Frankincense",
+      "Over 14-Hour Lasting Nocturnal Presence",
+      "Hand-polished Obsidian Black Lacquered Bottle",
+      "Signed Botanical Batch Certificate"
+    ],
+    notes: {
+      top: ["Tellicherry Black Pepper", "Elemi Resin", "Coriander Seed"],
+      heart: ["Somalian Frankincense", "Smoked Birch Tar", "Guaiacwood"],
+      base: ["Dark Fossilized Amber", "Assam Oud Extract", "Roasted Tonka"]
+    },
     isFeatured: true,
     reviews: [
-      { name: "Liam Thorne", rating: 5, comment: "Thocky, deep sound profile right out of the box. The OLED screen is super handy!" }
+      { name: "Alexander K.", rating: 5, comment: "Intensely elegant. Like velvet drenched in holy smoke." }
     ]
   },
   {
-    name: "AeroPrecision Ultralight Wireless Gaming Mouse 49g",
-    slug: "aeroprecision-ultralight-gaming-mouse",
-    category: "Gaming & VR",
-    brand: "Razer / Nexus",
-    price: 119.99,
-    oldPrice: 149.99,
+    name: "Fleur Blanche Solstice",
+    subtitle: "Solar Tuberose • Jasmine Sambac • Golden Neroli",
+    slug: "fleur-blanche-solstice",
+    category: "Floral & Botanical",
+    archetype: "Floral",
+    concentration: "Extrait de Parfum (28% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 260,
+    oldPrice: 290,
     rating: 4.8,
-    reviewsCount: 28,
-    stock: 25,
-    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&auto=format&fit=crop&q=80",
-    description: "Sub-49g magnesium alloy wireless gaming mouse featuring 30K optical sensor, 8000Hz polling rate, and pure PTFE speed skates.",
-    features: ["Ultralight Magnesium Alloy Shell (49g)", "30,000 DPI Precision Focus Optical Sensor", "True 8K Wireless HyperPolling Rate", "Up to 90 Hours Continuous Battery"],
-    isFeatured: false,
-    reviews: []
-  },
-  {
-    name: "VoltMaster 140W GaN 4-Port Fast Desktop Charger",
-    slug: "voltmaster-140w-gan-fast-charger",
-    category: "Electronics",
-    brand: "Anker",
-    price: 69.99,
-    oldPrice: 89.99,
-    rating: 4.9,
-    reviewsCount: 41,
-    stock: 35,
-    image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&auto=format&fit=crop&q=80",
-    description: "Next-gen Gallium Nitride (GaN III) high-speed charger capable of powering two MacBook Pros and two iPhones concurrently.",
-    features: ["140W Single Port Max Output (PD 3.1)", "3x USB-C + 1x USB-A Simultaneous Charging", "ActiveShield 2.0 Real-time Temperature Monitor", "Compact Travel-Friendly Foldable Plug"],
-    isFeatured: false,
-    reviews: []
-  },
-  {
-    name: "SpatialVision Pro VR Augmented Reality Headset",
-    slug: "spatialvision-pro-vr-headset",
-    category: "Gaming & VR",
-    brand: "Meta / Nexus",
-    price: 499.99,
-    oldPrice: 599.99,
-    rating: 4.8,
-    reviewsCount: 39,
-    stock: 14,
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269bc1df?w=800&auto=format&fit=crop&q=80",
-    description: "Dual 4K Micro-OLED spatial reality headset with full-color passthrough, iris eye tracking, and precise hand gesture control.",
-    features: ["Dual 4K Micro-OLED Displays (4320 x 2160)", "High-Resolution Color Spatial Passthrough", "Eye & Hand Motion Tracking without Controllers", "Ultra-Balanced Breathable Headband"],
-    isFeatured: true,
-    reviews: []
-  },
-  {
-    name: "Obsidian Modular Tactical Urban Backpack 25L",
-    slug: "obsidian-modular-tactical-backpack",
-    category: "Fashion & Lifestyle",
-    brand: "Peak Design / Nexus",
-    price: 169.99,
-    oldPrice: 219.99,
-    rating: 4.9,
-    reviewsCount: 26,
+    reviewsCount: 46,
     stock: 22,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80",
-    description: "Weatherproof 1000D Cordura backpack with magnetic Fidlock buckles, dedicated 16-inch padded tech compartment, and modular dividers.",
-    features: ["1000D Waterproof Recycled Cordura", "German Fidlock Magnetic Quick-Release Buckles", "Suspended 16-inch Laptop & Tablet Vault", "Hidden RFID Passport & AirTag Pocket"],
-    isFeatured: false,
-    reviews: []
+    image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "The euphoria of solstice daylight captured in nectar. Night-blooming Indian tuberose interlaces with sun-kissed Grasse jasmine, luminous solar aldehydes, and a silky bed of golden sandalwood.",
+    features: [
+      "Hand-picked Night Tuberose from Mysore",
+      "Luminous Sillage with Creamy Solar Warmth",
+      "Eco-Friendly Glass Bottle with 24k Gold Lettering",
+      "Zero Synthetic Phthalates or Stabilizers"
+    ],
+    notes: {
+      top: ["Solar Aldehydes", "Moroccan Neroli", "Green Pear"],
+      heart: ["Mysore Tuberose Absolute", "Night-blooming Jasmine", "Ylang Ylang"],
+      base: ["Sandalwood Cream", "Clean Cashmere Musk", "White Amber"]
+    },
+    isFeatured: true,
+    reviews: [
+      { name: "Camille Laurent", rating: 5, comment: "Radiant, feminine, and sophisticated without being overpowering." }
+    ]
   },
   {
-    name: "AuraCast Spatial Soundbar & Wireless Subwoofer",
-    slug: "auracast-spatial-soundbar-subwoofer",
-    category: "Audio & Acoustics",
-    brand: "Sonos / Nexus",
-    price: 399.99,
-    oldPrice: 499.99,
+    name: "Citrus Sauvage Vert",
+    subtitle: "Calabrian Bergamot • Wild Basil • Haitian Vetiver",
+    slug: "citrus-sauvage-vert",
+    category: "Citrus & Solar",
+    archetype: "Fresh",
+    concentration: "Eau de Parfum Intense (22% Conc.)",
+    volume: "100ml / 3.4 fl.oz",
+    brand: "Odoratus",
+    price: 240,
+    oldPrice: 275,
     rating: 4.9,
     reviewsCount: 33,
-    stock: 10,
-    image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80",
-    description: "7.1.4 Dolby Atmos spatial soundbar with upward-firing height channels, wireless 8-inch down-firing subwoofer, and eARC connectivity.",
-    features: ["Dolby Atmos & DTS:X 3D Spatial Audio", "Wireless 8-Inch Subwoofer (300W Peak)", "HDMI eARC & Optical / Bluetooth 5.3", "Acoustic Room Calibration Microphone"],
+    stock: 30,
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "A burst of wild Mediterranean morning mist. Crushed green basil leaves, sun-drenched bergamot rinds, and crisp sea salt minerals rest atop an earthy foundation of vetiver root and driftwood.",
+    features: [
+      "Cold-Pressed Reggio Calabria Bergamot",
+      "Invigorating Mineral & Coastal Sillage",
+      "Generous 100ml Heavy Glass Flacon",
+      "Ideal for Daytime Reverie and Warm Climate"
+    ],
+    notes: {
+      top: ["Calabrian Bergamot", "Green Lemon", "Wild Crushed Basil"],
+      heart: ["Mediterranean Sea Salt", "Orange Blossom", "Juniper Berry"],
+      base: ["Haitian Vetiver", "French Oakmoss", "Sun-Bleached Cedar"]
+    },
     isFeatured: true,
     reviews: []
   },
   {
-    name: "Nordic Minimalist Ceramic Pour-Over Kettle & Brewer",
-    slug: "nordic-ceramic-pour-over-kettle",
-    category: "Home & Living",
-    brand: "Fellow",
-    price: 89.99,
-    oldPrice: 109.99,
-    rating: 4.7,
-    reviewsCount: 18,
-    stock: 30,
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
-    description: "Matte black precision gooseneck electric kettle with PID temperature control, stop-watch brew timer, and double-wall ceramic dripper.",
-    features: ["PID Precision Temperature Regulation (±1°F)", "Gooseneck Spout for Controlled Flow Rate", "Built-in Brew Timer & LCD Screen", "Matte Heat-Resistant Nordic Ceramic Finish"],
+    name: "Rose Impériale de Mai",
+    subtitle: "Centifolia Rose de Mai • Saffron • Smoked Olibanum",
+    slug: "rose-imperiale-de-mai",
+    category: "Floral & Botanical",
+    archetype: "Floral",
+    concentration: "Extrait de Parfum (30% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 295,
+    oldPrice: 335,
+    rating: 4.9,
+    reviewsCount: 29,
+    stock: 15,
+    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "An aristocratic rose sculpted with crimson saffron and incense. Distilled from rare May centifolia roses harvested at dawn in Grasse, elevated by spicy saffron threads and a deep amberwood spine.",
+    features: [
+      "Grasse Centifolia Roses Harvested at Dawn",
+      "Opulent Saffron & Velvet Patchouli Base",
+      "Artisanal Micro-Batch Numbered Series",
+      "Includes Silk Travel Pouch"
+    ],
+    notes: {
+      top: ["Lychee Nectar", "Red Saffron", "Pink Peppercorn"],
+      heart: ["Centifolia Rose de Mai", "Bulgarian Damask Rose", "Taif Rose"],
+      base: ["Indonesian Patchouli", "Smoked Olibanum", "Golden Amberwood"]
+    },
     isFeatured: false,
     reviews: []
   },
   {
-    name: "CyberPulse High-Density 25,000mAh Powerbank 100W",
-    slug: "cyberpulse-25000mah-powerbank",
-    category: "Electronics",
-    brand: "Shargeek / Nexus",
-    price: 129.99,
-    oldPrice: 169.99,
+    name: "Ambre Nocturne",
+    subtitle: "Bourbon Vanilla • Benzoin • Spiced Tobacco",
+    slug: "ambre-nocturne",
+    category: "Amber & Resin",
+    archetype: "Amber",
+    concentration: "Extrait de Parfum (33% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 310,
+    oldPrice: 350,
+    rating: 5.0,
+    reviewsCount: 41,
+    stock: 16,
+    image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "An intoxicating nectar of warm golden amber, aged spiced rum, and cured tobacco leaves steeped in double-distilled Madagascar Bourbon vanilla pods.",
+    features: [
+      "Double-distilled Madagascar Vanilla Bean",
+      "Warm Intimate Sillage for Nocturnal Evenings",
+      "Lacquered Amber-Hued Heavy Glass Flacon",
+      "Includes 2 Luxury Atomizer Samples"
+    ],
+    notes: {
+      top: ["Aged Dark Rum", "Ceylon Cinnamon Bark", "Nutmeg"],
+      heart: ["Siam Benzoin", "Tobacco Blossom", "Labdanum"],
+      base: ["Madagascar Bourbon Vanilla", "Raw Cocoa", "Amber Resin"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Le Jardin d'Or Solstice",
+    subtitle: "Bitter Orange • Solar Neroli • Honeyed Amber",
+    slug: "le-jardin-dor-solstice",
+    category: "Citrus & Solar",
+    archetype: "Fresh",
+    concentration: "Extrait de Parfum (30% Conc.)",
+    volume: "100ml / 3.4 fl.oz",
+    brand: "Odoratus",
+    price: 340,
+    oldPrice: 390,
+    rating: 5.0,
+    reviewsCount: 52,
+    stock: 14,
+    image: "https://images.unsplash.com/photo-1583445013765-46c20c4a6772?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1583445013765-46c20c4a6772?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "The crowning creation of the Solstice Collection. Golden rays over a Mediterranean terrace lined with orange trees, wild ginger blooms, and golden beeswax amber.",
+    features: [
+      "Signature Solstice Botanical Blend",
+      "Special Edition 100ml Heavy Collector Flacon",
+      "Ultra-Luxurious 18+ Hours Sillage",
+      "Gold Embossed Atelier Gift Box Included"
+    ],
+    notes: {
+      top: ["Bitter Orange Peel", "Sicilian Mandarin", "Cardamom Seed"],
+      heart: ["Solar Orange Blossom", "Wild Ginger Flower", "Neroli Absolute"],
+      base: ["Honeyed Amber", "Creamy Sandalwood", "Golden Musk"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Oud Céleste",
+    subtitle: "Vintage Assam Oud • Taif Rose • Dark Leather",
+    slug: "oud-celeste",
+    category: "Woody & Earthy",
+    archetype: "Woody",
+    concentration: "Extrait de Parfum (35% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 380,
+    oldPrice: 420,
+    rating: 5.0,
+    reviewsCount: 35,
+    stock: 9,
+    image: "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?w=800&auto=format&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?w=800&auto=format&fit=crop&q=80"
+    ],
+    description: "A majestic symphony of vintage aged Assam Agarwood, velvety Taif rose petals, and hand-tanned saddle leather. Regal, deep, and utterly unforgettable.",
+    features: [
+      "12-Year Aged Natural Assam Agarwood",
+      "Highest Concentration (35% Pure Extrait)",
+      "Smoked Jet Black Heavy Crystal Bottle",
+      "Individually Numbered Flacon Edition"
+    ],
+    notes: {
+      top: ["Iranian Red Saffron", "Italian Bergamot", "Thyme"],
+      heart: ["Aged Assam Oud", "Taif Rose Absolute", "Cypriol"],
+      base: ["Dark Saddle Leather", "Castoreum", "Birch Tar"]
+    },
+    isFeatured: false,
+    reviews: []
+  },
+  {
+    name: "Iris Céleste d'Or",
+    subtitle: "Florentine Orris Root • Violet Leaf • Cashmere Musks",
+    slug: "iris-celeste-dor",
+    category: "Floral & Botanical",
+    archetype: "Floral",
+    concentration: "Extrait de Parfum (29% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 305,
+    oldPrice: 345,
     rating: 4.9,
-    reviewsCount: 45,
-    stock: 28,
-    image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&auto=format&fit=crop&q=80",
-    description: "Transparent cyberpunk powerbank featuring a full-color IPS status display, 100W Power Delivery output, and airline-approved 25,000mAh capacity.",
-    features: ["Transparent Cyberpunk Industrial Enclosure", "100W USB-C PD Rapid Input & Output", "Real-Time IPS Color Voltage & Battery Meter", "Airline Flight-Safe 93.5Wh Capacity"],
+    reviewsCount: 37,
+    stock: 14,
+    image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800&auto=format&fit=crop&q=80"],
+    description: "The crown jewel of Italian perfumery. 3-year aged Florentine orris butter blended with cool morning dew, crisp violet leaves, and a soft powdery halo of white cashmere.",
+    features: [
+      "3-Year Aged Tuscan Orris Rhizome",
+      "Silken Powdery Sillage for Quiet Luxury",
+      "Frosted Crystal Flacon with Gold Crest",
+      "Complimentary Discovery Vials Included"
+    ],
+    notes: {
+      top: ["Morning Dew Accord", "Italian Angelica", "Pink Pepper"],
+      heart: ["Florentine Orris Butter", "French Violet Leaves", "Heliotrope"],
+      base: ["White Cashmere", "Ambrette Seed", "Soft Cedarwood"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Bois de Kyoto",
+    subtitle: "Japanese Hinoki • Smoked Cedar • Sacred Incense",
+    slug: "bois-de-kyoto",
+    category: "Woody & Earthy",
+    archetype: "Woody",
+    concentration: "Extrait de Parfum (31% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 290,
+    oldPrice: 330,
+    rating: 5.0,
+    reviewsCount: 44,
+    stock: 16,
+    image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=800&auto=format&fit=crop&q=80"],
+    description: "A contemplative stroll through Kyoto temple courtyards at dusk. Resinous Japanese Hinoki wood mingles with meditative temple incense, green moss, and mountain cedar.",
+    features: [
+      "Sustainable Japanese Hinoki Wood Distillate",
+      "Zen Meditative Accord for Deep Stillness",
+      "Minimalist Dark Smoked Glass Flacon",
+      "Numbered Harvest Batch"
+    ],
+    notes: {
+      top: ["Japanese Yuzu", "Green Cypress", "Black Cardamom"],
+      heart: ["Hinoki Wood", "Kyoto Temple Incense", "Dry Pine Needles"],
+      base: ["Smoked Cedarwood", "Tree Moss", "Ambergris"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Tabac Impérial Bourbon",
+    subtitle: "Havana Tobacco Leaf • Roasted Tonka • Vanilla Caviar",
+    slug: "tabac-imperial-bourbon",
+    category: "Gourmand & Spices",
+    archetype: "Amber",
+    concentration: "Extrait de Parfum (34% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 335,
+    oldPrice: 375,
+    rating: 5.0,
+    reviewsCount: 62,
+    stock: 11,
+    image: "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&auto=format&fit=crop&q=80"],
+    description: "Opulent and addictive. Cured blond tobacco leaves steeped in aged Bourbon oak casks, surrounded by roasted tonka bean, dark dried fruits, and vanilla caviar.",
+    features: [
+      "Double-aged in French Oak Casks",
+      "Intensely Rich Gourmand & Tobacco Sillage",
+      "Heavy Golden-Amber Glass Bottle",
+      "Wax-Sealed Collector Edition"
+    ],
+    notes: {
+      top: ["Spiced Ginger", "Star Anise", "Dried Plum"],
+      heart: ["Cured Havana Tobacco Leaf", "Cacao Pod", "Tonka Bean"],
+      base: ["Bourbon Vanilla Caviar", "Guaiacwood", "Honeyed Amber"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Neroli Blanc de Grasse",
+    subtitle: "Orange Blossom Absolute • Sea Salt • White Musk",
+    slug: "neroli-blanc-de-grasse",
+    category: "Citrus & Solar",
+    archetype: "Fresh",
+    concentration: "Eau de Parfum Intense (24% Conc.)",
+    volume: "100ml / 3.4 fl.oz",
+    brand: "Odoratus",
+    price: 250,
+    oldPrice: 285,
+    rating: 4.8,
+    reviewsCount: 31,
+    stock: 25,
+    image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=800&auto=format&fit=crop&q=80"],
+    description: "Sunlight glistening over Provence citrus groves. Pristine white orange blossoms hand-gathered at first light, balanced by crystalline sea salt and airy white musk.",
+    features: [
+      "Cold-extracted Grasse Orange Blossom",
+      "Effortlessly Fresh Daily Signature",
+      "Generous 100ml Heavy Glass Bottle",
+      "Zero Harsh Synthetic Fixatives"
+    ],
+    notes: {
+      top: ["Mandarin Zest", "Green Petitgrain", "Neroli Petals"],
+      heart: ["Orange Blossom Absolute", "French Lavender", "Sea Minerals"],
+      base: ["White Ambergris", "Clean Musks", "Bleached Driftwood"]
+    },
+    isFeatured: false,
+    reviews: []
+  },
+  {
+    name: "Cardamom Manuscript",
+    subtitle: "Black Cardamom • Roasted Hazelnut • Cashmere Woods",
+    slug: "cardamom-manuscript",
+    category: "Gourmand & Spices",
+    archetype: "Woody",
+    concentration: "Extrait de Parfum (30% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 285,
+    oldPrice: 325,
+    rating: 4.9,
+    reviewsCount: 48,
+    stock: 19,
+    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"],
+    description: "A cozy intellectual atmosphere reminiscent of rare book archives. Aromatic green and black cardamoms pair with roasted hazelnuts and warm creamy cashmere woods.",
+    features: [
+      "Pure Guatemala Green Cardamom CO2",
+      "Intriguing Spiced Gourmand Warmth",
+      "Smoked Glass Bottle with Golden Label",
+      "Includes 2 Discovery Samples"
+    ],
+    notes: {
+      top: ["Green Cardamom", "Nutmeg", "Bergamot Rind"],
+      heart: ["Roasted Hazelnut Accord", "Orris", "Dark Rum"],
+      base: ["Cashmere Woods", "Creamy Sandalwood", "Brown Sugar Vanilla"]
+    },
+    isFeatured: false,
+    reviews: []
+  },
+  {
+    name: "Cuir Solaire d'Orient",
+    subtitle: "Golden Saffron • Tuscan Suede • Sun-Baked Resins",
+    slug: "cuir-solaire-dorient",
+    category: "Woody & Earthy",
+    archetype: "Woody",
+    concentration: "Extrait de Parfum (32% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 315,
+    oldPrice: 355,
+    rating: 5.0,
+    reviewsCount: 39,
+    stock: 13,
+    image: "https://images.unsplash.com/photo-1583445013765-46c20c4a6772?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1583445013765-46c20c4a6772?w=800&auto=format&fit=crop&q=80"],
+    description: "Sun-drenched desert leather illuminated by crimson Persian saffron and radiant labdanum. Refined, daring, and richly textured.",
+    features: [
+      "Finest Tuscan Suede & Persian Saffron",
+      "Exceptional 16+ Hour Presence",
+      "Lacquered Matte Black Flacon",
+      "Artisanal Certificate of Origin"
+    ],
+    notes: {
+      top: ["Crimson Saffron", "Thyme", "Raspberry"],
+      heart: ["Tuscan Suede", "Frankincense", "Jasmine"],
+      base: ["Dark Amber", "Birch Tar", "Atlas Cedarwood"]
+    },
+    isFeatured: false,
+    reviews: []
+  },
+  {
+    name: "Vanille Noire Exquise",
+    subtitle: "Smoked Vanilla Pods • Dark Cacao • Golden Benzoin",
+    slug: "vanille-noire-exquise",
+    category: "Gourmand & Spices",
+    archetype: "Amber",
+    concentration: "Extrait de Parfum (33% Conc.)",
+    volume: "50ml / 1.7 fl.oz",
+    brand: "Odoratus",
+    price: 295,
+    oldPrice: 335,
+    rating: 4.9,
+    reviewsCount: 56,
+    stock: 17,
+    image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80"],
+    description: "An adult, sophisticated take on vanilla. Raw Bourbon vanilla beans gently smoked over cherrywood embers, enriched with bitter cocoa and golden benzoin tears.",
+    features: [
+      "Whole Madagascar Bourbon Vanilla Absolute",
+      "Non-Syrupy Smoky Sweetness",
+      "Heavy Glass Flacon with Metallic Cap",
+      "Includes 2 Complimentary Samples"
+    ],
+    notes: {
+      top: ["Bitter Almond", "Clove Bud", "Pink Pepper"],
+      heart: ["Dark Cacao", "Siam Benzoin", "Tobacco Flower"],
+      base: ["Smoked Bourbon Vanilla", "Guaicwood", "Tonka Bean"]
+    },
+    isFeatured: true,
+    reviews: []
+  },
+  {
+    name: "Vetiver Brume Sauvage",
+    subtitle: "Haitian Vetiver • Pink Grapefruit • Juniper Berry",
+    slug: "vetiver-brume-sauvage",
+    category: "Woody & Earthy",
+    archetype: "Fresh",
+    concentration: "Eau de Parfum Intense (22% Conc.)",
+    volume: "100ml / 3.4 fl.oz",
+    brand: "Odoratus",
+    price: 245,
+    oldPrice: 280,
+    rating: 4.8,
+    reviewsCount: 28,
+    stock: 22,
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80",
+    images: ["https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80"],
+    description: "Earthy elegance. Haitian vetiver roots washed in cool morning rain and crisp pink grapefruit zest, underscored by crushed juniper berries and clean cedar.",
+    features: [
+      "Ethically Sourced Les Cayes Haitian Vetiver",
+      "Crisp Clean Earthy Aura for All Occasions",
+      "Generous 100ml Heavy Collector Flacon",
+      "Zero Phthalates or Stabilizers"
+    ],
+    notes: {
+      top: ["Pink Grapefruit", "Cardamom", "Bergamot"],
+      heart: ["Juniper Berry", "Nutmeg", "Geranium"],
+      base: ["Haitian Vetiver", "Virginia Cedar", "Oakmoss"]
+    },
     isFeatured: false,
     reviews: []
   }
@@ -307,13 +565,15 @@ const seedDB = async () => {
     console.log('🌱 Seeding 5 Promo Coupons...');
     await Coupon.insertMany(coupons);
 
-    console.log('🌱 Seeding Demo Admin & Users...');
+    console.log('🌱 Seeding Demo Admin & VIP Users...');
     const adminUser = await User.create({
       name: "Enterprise Admin",
       email: "admin@store.com",
       password: "admin123456",
       role: "admin",
-      phone: "+1 (555) 019-2834"
+      phone: "+1 (555) 019-2834",
+      loyaltyPoints: 1250,
+      vipTier: "Gold"
     });
 
     const standardUser = await User.create({
@@ -321,13 +581,15 @@ const seedDB = async () => {
       email: "user@store.com",
       password: "user123456",
       role: "user",
-      phone: "+1 (555) 837-1928"
+      phone: "+1 (555) 837-1928",
+      loyaltyPoints: 350,
+      vipTier: "Silver"
     });
 
-    console.log('🌱 Seeding 16 Premium Luxury Tech & Lifestyle Products...');
+    console.log(`🌱 Seeding ${products.length} Premium Luxury Artisanal Perfume Flacons...`);
     const insertedProducts = await Product.insertMany(products);
 
-    console.log('🌱 Seeding Initial Order History for Demo User...');
+    console.log('🌱 Seeding Initial Order History with Tracking...');
     await Order.create({
       user: standardUser._id,
       customerName: standardUser.name,
@@ -357,10 +619,29 @@ const seedDB = async () => {
       appliedCoupon: "WELCOME20",
       paymentMethod: "Credit Card / Visa & Mastercard",
       paymentStatus: "completed",
-      orderStatus: "processing"
+      orderStatus: "processing",
+      trackingNumber: "ODR-EXP-487601",
+      carrier: "DHL Express Maison Air",
+      estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      timeline: [
+        {
+          status: "pending",
+          title: "Order Registered",
+          description: "Maison order placed and payment confirmed.",
+          timestamp: new Date(),
+          completed: true
+        },
+        {
+          status: "processing",
+          title: "Atelier Preparation",
+          description: "Flacons reserved and queued for batch certification at Grasse atelier.",
+          timestamp: new Date(),
+          completed: true
+        }
+      ]
     });
 
-    console.log('✨ All 16 products, 5 categories, 5 coupons, users, and orders seeded successfully!');
+    console.log(`✨ All ${products.length} products, 5 categories, 5 coupons, users, and orders seeded successfully!`);
     process.exit(0);
   } catch (error) {
     console.error('❌ Seeding error:', error);

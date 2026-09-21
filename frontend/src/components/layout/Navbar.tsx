@@ -4,140 +4,196 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
-import { ShoppingCart, ShoppingBag, Sparkles, LogOut, Sun, Moon, Compass, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, LogOut, Sun, Moon, Menu, X, User, Sparkles, Truck, Shield, Heart } from 'lucide-react';
+import { CartDrawer } from '@/components/cart/CartDrawer';
+import { useRouter } from 'next/navigation';
 
 export const Navbar = () => {
   const { itemCount } = useCart();
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [navSearch, setNavSearch] = useState('');
+  const router = useRouter();
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (navSearch.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(navSearch.trim())}`);
+    }
+  };
 
   return (
-    <div className="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 pointer-events-none">
-      <header className="max-w-5xl mx-auto glass-island rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 pointer-events-auto transition-all">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-full bg-stone-900 text-white dark:bg-gradient-to-tr dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-110">
-            <ShoppingCart className="w-4 h-4 text-amber-300 dark:text-white" />
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className="font-heading font-black text-lg tracking-tight text-stone-900 dark:text-white">
-              MATJARI
-            </span>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-700 dark:text-cyan-400 bg-amber-500/10 dark:bg-cyan-500/10 px-1.5 py-0.5 rounded-full border border-amber-500/20 dark:border-cyan-500/20">
-              STORE
-            </span>
-          </div>
+    <>
+      {/* Top Notice Bar */}
+      <div className="bg-[#1a1816] text-[#f3efe6] text-[10px] sm:text-[11px] tracking-widest uppercase font-medium py-1.5 px-4 text-center border-b border-[#2b2724] flex items-center justify-center gap-4">
+        <span>Complimentary 2ml Discovery Vials with All Orders &bull; Handcrafted in Grasse</span>
+        <span className="hidden md:inline">&bull;</span>
+        <Link href="/quiz" className="hidden md:inline text-[#c29b62] hover:underline font-semibold flex items-center gap-1">
+          <Sparkles className="w-3 h-3" />
+          <span>Find Your Signature Scent (AI Quiz) &rarr;</span>
         </Link>
+      </div>
 
-        {/* Center Nav Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-stone-100/80 dark:bg-white/5 border border-stone-200/80 dark:border-white/10 rounded-full p-1 text-xs font-bold text-stone-600 dark:text-slate-300">
-          <Link href="/" className="px-4 py-1.5 rounded-full hover:text-stone-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 transition-all shadow-none hover:shadow-sm">
-            Storefront
+      <header className="sticky top-0 z-40 bg-[#f8f6f0]/95 dark:bg-[#0d0c0b]/95 backdrop-blur-md border-b border-[#e8e2d4] dark:border-white/10 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          
+          {/* Left: Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 xl:gap-7 text-xs uppercase tracking-[0.2em] font-medium text-[#1a1816] dark:text-[#f8f6f0]">
+            <Link href="/about" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">
+              About
+            </Link>
+            <Link href="/shop" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">
+              Shop
+            </Link>
+            <Link href="/occasions" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">
+              Occasions
+            </Link>
+            <Link href="/quiz" className="text-[#8c6d3b] dark:text-[#c29b62] hover:underline flex items-center gap-1 font-semibold transition-colors">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI Quiz</span>
+            </Link>
+          </nav>
+
+          {/* Center: Brand Monogram & Title */}
+          <Link href="/" className="flex flex-col items-center group">
+            <span className="font-serif text-2xl sm:text-3xl tracking-[0.3em] uppercase font-light text-[#1a1816] dark:text-[#f8f6f0] transition-colors">
+              ODORATUS
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.35em] text-[#8c6d3b] dark:text-[#c29b62] -mt-1 font-sans">
+              Haute Parfumerie
+            </span>
           </Link>
-          <a href="#featured" className="px-4 py-1.5 rounded-full hover:text-stone-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 transition-all flex items-center gap-1 hover:shadow-sm">
-            <Sparkles className="w-3 h-3 text-amber-600 dark:text-purple-400" />
-            <span>Spotlight</span>
-          </a>
-          <a href="#catalog" className="px-4 py-1.5 rounded-full hover:text-stone-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 transition-all flex items-center gap-1 hover:shadow-sm">
-            <Compass className="w-3 h-3 text-stone-600 dark:text-cyan-400" />
-            <span>Catalog</span>
-          </a>
-        </nav>
 
-        {/* Right CTA / Theme Switcher / Cart & Auth */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Theme Switcher Button */}
-          <button
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Switch to Warm Off-White Mode' : 'Switch to Obsidian Dark Mode'}
-            className="w-9 h-9 rounded-full flex items-center justify-center bg-stone-100 dark:bg-slate-900 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-amber-400 hover:scale-105 active:scale-95 transition-all shadow-sm"
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-4 h-4 animate-in spin-in-180 duration-300" />
-            ) : (
-              <Moon className="w-4 h-4 text-stone-800 animate-in spin-in-180 duration-300" />
-            )}
-          </button>
+          {/* Right: Search, Theme, Wishlist, Track, Account & Shopping Bag */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            {/* Inline Search Input */}
+            <form onSubmit={handleSearchSubmit} className="hidden lg:flex items-center relative">
+              <Search className="w-3.5 h-3.5 text-[#8c6d3b] dark:text-[#c29b62] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search notes..."
+                value={navSearch}
+                onChange={(e) => setNavSearch(e.target.value)}
+                className="w-32 xl:w-40 bg-[#f3efe6] dark:bg-[#1a1816] border border-[#e8e2d4] dark:border-white/10 rounded-full pl-8 pr-3 py-1.5 text-xs text-[#1a1816] dark:text-[#f8f6f0] placeholder-[#a6a096] focus:outline-none focus:border-[#b38b4d] transition-all"
+              />
+            </form>
 
-          {/* Cart Trigger */}
-          <Link href="/cart">
-            <button className="flex items-center gap-2 bg-stone-900 text-white dark:bg-indigo-600/20 dark:text-indigo-200 border border-stone-800 dark:border-indigo-500/40 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-md hover:scale-105 active:scale-95">
-              <ShoppingBag className="w-3.5 h-3.5 text-amber-300 dark:text-indigo-400" />
-              <span className="hidden sm:inline">Cart</span>
-              {itemCount > 0 && (
-                <span className="bg-amber-500 dark:bg-gradient-to-r dark:from-pink-500 dark:to-rose-500 text-stone-950 dark:text-white text-[10px] font-black px-1.5 py-0.5 rounded-full min-w-[18px] text-center shadow-sm animate-bounce">
-                  {itemCount}
-                </span>
+            {/* Wishlist Link */}
+            <Link
+              href="/wishlist"
+              title="Saved Flacons Wishlist"
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f3efe6] dark:bg-[#1a1816] border border-[#e4decfa0] dark:border-white/10 text-[#1a1816] dark:text-[#f8f6f0] hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors"
+            >
+              <Heart className="w-3.5 h-3.5" />
+            </Link>
+
+            {/* Live Tracking Link */}
+            <Link
+              href="/track"
+              title="Track Consignment"
+              className="hidden sm:flex items-center gap-1 text-[11px] uppercase tracking-wider text-[#7a746e] dark:text-[#a6a096] hover:text-[#b38b4d] transition-colors"
+            >
+              <Truck className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">Track</span>
+            </Link>
+
+            {/* Admin Portal Link */}
+            <Link
+              href="/admin"
+              title="Executive Admin Panel"
+              className="hidden xl:flex items-center gap-1 text-[10px] uppercase tracking-wider px-2 py-1 bg-[#f3efe6] dark:bg-[#1a1816] border border-[#e8e2d4] dark:border-white/10 text-[#8c6d3b] dark:text-[#c29b62] hover:border-[#b38b4d]"
+            >
+              <Shield className="w-3 h-3" />
+              <span>Admin</span>
+            </Link>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Switch to Warm Sand Mode' : 'Switch to Obsidian Dark Mode'}
+              className="w-8 h-8 rounded-full flex items-center justify-center bg-[#f3efe6] dark:bg-[#1a1816] border border-[#e4decfa0] dark:border-white/10 text-[#1a1816] dark:text-[#c29b62] hover:border-[#b38b4d] transition-all"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-3.5 h-3.5 animate-in spin-in-180 duration-300" />
+              ) : (
+                <Moon className="w-3.5 h-3.5 text-[#1a1816] animate-in spin-in-180 duration-300" />
               )}
             </button>
-          </Link>
 
-          {/* User Status */}
-          {user ? (
-            <div className="flex items-center gap-2 bg-stone-100 dark:bg-slate-900/90 border border-stone-200 dark:border-white/10 rounded-full pl-3 pr-1.5 py-1 text-xs font-bold text-stone-800 dark:text-slate-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
-              <span className="max-w-[80px] truncate">{user.name}</span>
-              <button
-                onClick={logout}
-                title="Sign out"
-                className="p-1 rounded-full text-stone-400 hover:text-rose-500 hover:bg-rose-500/10 transition-colors"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          ) : (
-            <div className="hidden sm:flex items-center gap-1.5">
-              <Link href="/auth/login">
-                <button className="px-3 py-1.5 text-xs font-bold text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white transition-colors">
-                  Sign In
-                </button>
+            {/* User Account / VIP Privilege Link */}
+            {user ? (
+              <Link href="/account" className="flex items-center gap-1.5 bg-[#f3efe6] dark:bg-[#1a1816] border border-[#e4decfa0] dark:border-white/10 rounded-full pl-2.5 pr-2 py-0.5 text-xs text-[#1a1816] dark:text-[#f8f6f0] hover:border-[#b38b4d]">
+                <span className="max-w-[70px] truncate font-medium text-[11px]">{user.name}</span>
+                <span className="text-[9px] bg-[#b38b4d] text-white px-1.5 py-0.2 rounded-full font-bold">VIP</span>
               </Link>
-              <Link href="/auth/register">
-                <button className="glow-button px-3.5 py-1.5 rounded-full text-xs font-bold text-white">
-                  Join Matjari
-                </button>
+            ) : (
+              <Link href="/account" className="hidden sm:flex items-center gap-1 text-[11px] uppercase tracking-wider text-[#1a1816] dark:text-[#f8f6f0] hover:text-[#b38b4d] transition-colors font-medium">
+                <User className="w-3.5 h-3.5" />
+                <span>Account</span>
               </Link>
-            </div>
-          )}
+            )}
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenu(!mobileMenu)}
-            className="md:hidden p-1.5 rounded-full bg-stone-100 dark:bg-white/5 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-slate-300"
-          >
-            {mobileMenu ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </button>
+            {/* Shopping Bag Trigger (Opens Sliding Cart Drawer) */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="flex items-center gap-1.5 bg-[#1a1816] text-[#f8f6f0] dark:bg-[#f8f6f0] dark:text-[#1a1816] px-3.5 py-1.5 rounded-full text-[11px] tracking-wider uppercase font-semibold transition-all hover:bg-[#b38b4d] dark:hover:bg-[#c29b62] shadow-sm"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Bag</span>
+              <span className="bg-[#b38b4d] text-white text-[10px] font-bold px-1.5 rounded-full min-w-[15px] text-center">
+                {itemCount}
+              </span>
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenu(!mobileMenu)}
+              className="md:hidden p-2 rounded-lg bg-[#f3efe6] dark:bg-[#1a1816] text-[#1a1816] dark:text-[#f8f6f0]"
+            >
+              {mobileMenu ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenu && (
+          <div className="md:hidden bg-[#f8f6f0] dark:bg-[#141211] border-b border-[#e8e2d4] dark:border-white/10 px-6 py-5 flex flex-col gap-3 animate-in slide-in-from-top-3">
+            <Link href="/about" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1">
+              About Maison
+            </Link>
+            <Link href="/shop" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1">
+              Shop Fragrances
+            </Link>
+            <Link href="/occasions" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1">
+              Occasions
+            </Link>
+            <Link href="/quiz" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-semibold text-[#b38b4d] py-1 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI Scent Consultation</span>
+            </Link>
+            <Link href="/track" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1">
+              Track Consignment
+            </Link>
+            <Link href="/account" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1">
+              VIP Loyalty Rewards
+            </Link>
+            <Link href="/admin" onClick={() => setMobileMenu(false)} className="text-xs uppercase tracking-widest font-medium py-1 text-[#8c6d3b]">
+              Admin Control Panel
+            </Link>
+            <button
+              onClick={() => { setIsCartOpen(true); setMobileMenu(false); }}
+              className="text-left text-xs uppercase tracking-widest font-medium py-1 text-[#b38b4d]"
+            >
+              Shopping Bag ({itemCount})
+            </button>
+          </div>
+        )}
       </header>
 
-      {/* Mobile Drawer */}
-      {mobileMenu && (
-        <div className="md:hidden max-w-sm mx-auto mt-2 glass-island rounded-3xl p-4 flex flex-col gap-2 pointer-events-auto animate-in slide-in-from-top-4 shadow-xl">
-          <Link href="/" onClick={() => setMobileMenu(false)} className="px-3 py-2 text-xs font-bold text-stone-800 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-white/5 rounded-xl">
-            Storefront
-          </Link>
-          <a href="#featured" onClick={() => setMobileMenu(false)} className="px-3 py-2 text-xs font-bold text-stone-800 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-white/5 rounded-xl">
-            Spotlight
-          </a>
-          <a href="#catalog" onClick={() => setMobileMenu(false)} className="px-3 py-2 text-xs font-bold text-stone-800 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-white/5 rounded-xl">
-            Catalog
-          </a>
-          <Link href="/cart" onClick={() => setMobileMenu(false)} className="px-3 py-2 text-xs font-bold text-stone-800 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-white/5 rounded-xl">
-            Shopping Cart ({itemCount})
-          </Link>
-          {!user && (
-            <div className="pt-2 border-t border-stone-200 dark:border-white/10 grid grid-cols-2 gap-2">
-              <Link href="/auth/login" onClick={() => setMobileMenu(false)} className="text-center py-2 rounded-xl bg-stone-100 dark:bg-white/5 text-xs font-bold text-stone-900 dark:text-white">
-                Sign In
-              </Link>
-              <Link href="/auth/register" onClick={() => setMobileMenu(false)} className="text-center py-2 rounded-xl glow-button text-xs font-bold text-white">
-                Register
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+      {/* Slide-over Cart Drawer */}
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </>
   );
 };

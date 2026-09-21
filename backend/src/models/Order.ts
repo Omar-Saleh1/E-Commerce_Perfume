@@ -8,6 +8,14 @@ export interface IOrderItem {
   image: string;
 }
 
+export interface IOrderTimelineEvent {
+  status: string;
+  title: string;
+  description: string;
+  timestamp: Date;
+  completed: boolean;
+}
+
 export interface IOrder extends Document {
   user?: mongoose.Types.ObjectId;
   customerName: string;
@@ -29,7 +37,19 @@ export interface IOrder extends Document {
   appliedCoupon?: string;
   paymentMethod: string;
   paymentStatus: 'pending' | 'completed' | 'failed';
-  orderStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  orderStatus: 'pending' | 'processing' | 'blending' | 'shipped' | 'delivered' | 'cancelled';
+  fulfillmentTier?: string;
+  packaging?: {
+    tierName?: string;
+    boxType?: string;
+    insulationType?: string;
+    complimentarySamplesCount?: number;
+    specialInstructions?: string;
+  };
+  trackingNumber: string;
+  carrier: string;
+  estimatedDelivery: Date;
+  timeline: IOrderTimelineEvent[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -64,7 +84,31 @@ const OrderSchema = new Schema<IOrder>(
     appliedCoupon: { type: String },
     paymentMethod: { type: String, required: true, default: 'Cash on Delivery (COD)' },
     paymentStatus: { type: String, enum: ['pending', 'completed', 'failed'], default: 'pending' },
-    orderStatus: { type: String, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], default: 'processing' }
+    orderStatus: {
+      type: String,
+      enum: ['pending', 'processing', 'blending', 'shipped', 'delivered', 'cancelled'],
+      default: 'processing'
+    },
+    fulfillmentTier: { type: String, default: 'Standard Maison Ground' },
+    packaging: {
+      tierName: String,
+      boxType: String,
+      insulationType: String,
+      complimentarySamplesCount: Number,
+      specialInstructions: String
+    },
+    trackingNumber: { type: String, default: () => `ODR-STD-${Math.floor(100000 + Math.random() * 900000)}` },
+    carrier: { type: String, default: 'Maison National Postal & Ground Network' },
+    estimatedDelivery: { type: Date, default: () => new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) },
+    timeline: [
+      {
+        status: { type: String, required: true },
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+        timestamp: { type: Date, default: Date.now },
+        completed: { type: Boolean, default: true }
+      }
+    ]
   },
   { timestamps: true }
 );

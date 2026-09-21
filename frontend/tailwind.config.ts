@@ -11,47 +11,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
+        odoratus: {
+          bg: '#f8f6f0',
+          card: '#ffffff',
+          sand: '#f3efe6',
+          sandDark: '#e8e2d4',
+          accent: '#b38b4d',
+          accentDark: '#8c6d3b',
+          gold: '#c29b62',
+          espresso: '#1a1816',
+          charcoal: '#2b2724',
+          muted: '#7a746e',
+          border: '#e4decfa0',
         },
         dark: {
-          950: '#060913',
-          900: '#0b0f19',
-          850: '#101626',
-          800: '#172033',
-          700: '#222f49',
+          950: '#0c0b0a',
+          900: '#141211',
+          850: '#1a1816',
+          800: '#24211e',
+          700: '#332f2b',
         }
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', 'var(--font-plus-jakarta)', 'sans-serif'],
-        heading: ['var(--font-outfit)', 'sans-serif'],
+        serif: ['var(--font-cormorant)', 'Playfair Display', 'serif'],
+        heading: ['var(--font-cormorant)', 'Cinzel', 'serif'],
+        sans: ['var(--font-plus-jakarta)', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'glow-brand': '0 0 25px -5px rgba(99, 102, 241, 0.5)',
-        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
-        'glow-rose': '0 0 25px -5px rgba(244, 63, 94, 0.4)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        'luxury': '0 10px 40px -10px rgba(26, 24, 22, 0.08)',
+        'luxury-hover': '0 20px 50px -10px rgba(179, 139, 77, 0.18)',
+        'glow-gold': '0 0 30px rgba(194, 155, 98, 0.25)',
       },
-      animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
-      }
     },
   },
   plugins: [],

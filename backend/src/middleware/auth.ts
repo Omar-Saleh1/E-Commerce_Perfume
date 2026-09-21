@@ -13,18 +13,29 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
   }
 
   if (!token) {
-    return res.status(401).json({ success: false, message: 'Not authorized, token missing' });
+    return res.status(401).json({ success: false, message: 'Not authorized: Access token missing' });
   }
 
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'ecommerce_secret_jwt_key_2026_super_secure');
     const user = await User.findById(decoded.id).select('-password');
     if (!user) {
-      return res.status(401).json({ success: false, message: 'User not found' });
+      return res.status(401).json({ success: false, message: 'User not found or deleted' });
     }
     req.user = user;
     next();
   } catch (error) {
-    return res.status(401).json({ success: false, message: 'Invalid or expired token' });
+    return res.status(401).json({ success: false, message: 'Invalid or expired authorization token' });
+  }
+};
+
+export const adminOnly = (req: AuthRequest, res: Response, next: NextFunction) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    return res.status(403).json({
+      success: false,
+      message: 'Access Forbidden: Executive Admin privileges required'
+    });
   }
 };

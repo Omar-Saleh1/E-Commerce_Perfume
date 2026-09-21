@@ -10,11 +10,15 @@ export interface IProduct {
   _id: string;
   id?: string;
   name: string;
+  subtitle?: string;
   slug?: string;
   description: string;
   price: number;
   oldPrice?: number;
   category: string;
+  archetype?: string;
+  concentration?: string;
+  volume?: string;
   brand?: string;
   stock: number;
   rating: number;
@@ -22,6 +26,11 @@ export interface IProduct {
   image: string;
   images?: string[];
   features?: string[];
+  notes?: {
+    top?: string[];
+    heart?: string[];
+    base?: string[];
+  };
   isFeatured?: boolean;
   reviews?: IReview[];
 }

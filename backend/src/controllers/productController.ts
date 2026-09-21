@@ -16,7 +16,10 @@ export const getProducts = async (req: Request, res: Response) => {
       query.$or = [
         { name: { $regex: String(search), $options: 'i' } },
         { description: { $regex: String(search), $options: 'i' } },
-        { brand: { $regex: String(search), $options: 'i' } }
+        { subtitle: { $regex: String(search), $options: 'i' } },
+        { archetype: { $regex: String(search), $options: 'i' } },
+        { brand: { $regex: String(search), $options: 'i' } },
+        { category: { $regex: String(search), $options: 'i' } }
       ];
     }
     if (minPrice || maxPrice) {

@@ -8,6 +8,9 @@ export interface IUser extends Document {
   role: 'user' | 'admin';
   phone?: string;
   wishlist: mongoose.Types.ObjectId[];
+  loyaltyPoints: number;
+  vipTier: 'Bronze' | 'Silver' | 'Gold' | 'Atelier Connoisseur';
+  referralCode: string;
   createdAt: Date;
   updatedAt: Date;
   matchPassword(enteredPassword: string): Promise<boolean>;
@@ -20,7 +23,17 @@ const UserSchema = new Schema<IUser>(
     password: { type: String, required: true, minlength: 6 },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     phone: { type: String, trim: true },
-    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
+    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    loyaltyPoints: { type: Number, default: 150 },
+    vipTier: {
+      type: String,
+      enum: ['Bronze', 'Silver', 'Gold', 'Atelier Connoisseur'],
+      default: 'Bronze'
+    },
+    referralCode: {
+      type: String,
+      default: () => `ODR-${Math.random().toString(36).substring(2, 7).toUpperCase()}`
+    }
   },
   { timestamps: true }
 );

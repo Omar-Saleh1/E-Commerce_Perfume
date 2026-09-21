@@ -1,60 +1,113 @@
 import React from 'react';
-import { Sparkles, Shield, Truck, RefreshCw, Zap } from 'lucide-react';
+import Link from 'next/link';
+import { Sparkles, Shield, Gift, Truck, Clock } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto border-t border-stone-200 dark:border-white/10 bg-stone-100/80 dark:bg-slate-950 text-stone-600 dark:text-slate-400 transition-colors duration-300">
-      {/* Feature Strip */}
-      <div className="border-b border-stone-200/80 dark:border-white/5 bg-white/60 dark:bg-slate-900/40">
+    <footer className="mt-auto border-t border-[#e8e2d4] dark:border-white/10 bg-[#f3efe6] dark:bg-[#0d0c0b] text-[#7a746e] dark:text-[#a6a096] transition-colors duration-300">
+      {/* 4 Atelier Promises */}
+      <div className="border-b border-[#e8e2d4] dark:border-white/10 bg-white/70 dark:bg-[#141211]/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-indigo-500/10 border border-amber-500/20 dark:border-indigo-500/20 flex items-center justify-center text-amber-700 dark:text-indigo-400 shrink-0">
-              <Truck className="w-5 h-5" />
+          <div className="flex items-start gap-3.5">
+            <div className="w-9 h-9 border border-[#b38b4d]/40 dark:border-[#c29b62]/40 flex items-center justify-center text-[#8c6d3b] dark:text-[#c29b62] shrink-0 bg-[#f8f6f0] dark:bg-[#1a1816]">
+              <Truck className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-stone-900 dark:text-slate-100">Global Priority Shipping</h4>
-              <p className="text-xs text-stone-500 dark:text-slate-400">Free delivery on orders over $150</p>
+              <h4 className="text-xs uppercase tracking-wider font-bold text-[#1a1816] dark:text-[#f8f6f0]">Bespoke Express Delivery</h4>
+              <p className="text-[11px] text-[#7a746e] dark:text-[#a6a096] mt-0.5">Complimentary shipping on orders over $180</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-stone-500/10 dark:bg-purple-500/10 border border-stone-500/20 dark:border-purple-500/20 flex items-center justify-center text-stone-800 dark:text-purple-400 shrink-0">
-              <Shield className="w-5 h-5" />
+
+          <div className="flex items-start gap-3.5">
+            <div className="w-9 h-9 border border-[#b38b4d]/40 dark:border-[#c29b62]/40 flex items-center justify-center text-[#8c6d3b] dark:text-[#c29b62] shrink-0 bg-[#f8f6f0] dark:bg-[#1a1816]">
+              <Gift className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-stone-900 dark:text-slate-100">2-Year Warranty</h4>
-              <p className="text-xs text-stone-500 dark:text-slate-400">100% Genuine guaranteed</p>
+              <h4 className="text-xs uppercase tracking-wider font-bold text-[#1a1816] dark:text-[#f8f6f0]">Complimentary Discovery Vials</h4>
+              <p className="text-[11px] text-[#7a746e] dark:text-[#a6a096] mt-0.5">Two 2ml samples with every full flacon</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-cyan-500/10 border border-emerald-500/20 dark:border-cyan-500/20 flex items-center justify-center text-emerald-700 dark:text-cyan-400 shrink-0">
-              <RefreshCw className="w-5 h-5" />
+
+          <div className="flex items-start gap-3.5">
+            <div className="w-9 h-9 border border-[#b38b4d]/40 dark:border-[#c29b62]/40 flex items-center justify-center text-[#8c6d3b] dark:text-[#c29b62] shrink-0 bg-[#f8f6f0] dark:bg-[#1a1816]">
+              <Shield className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-stone-900 dark:text-slate-100">30-Day Free Returns</h4>
-              <p className="text-xs text-stone-500 dark:text-slate-400">No questions asked return policy</p>
+              <h4 className="text-xs uppercase tracking-wider font-bold text-[#1a1816] dark:text-[#f8f6f0]">Authenticity Guaranteed</h4>
+              <p className="text-[11px] text-[#7a746e] dark:text-[#a6a096] mt-0.5">Artisanal distillation in Grasse, France</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-rose-500/10 dark:bg-pink-500/10 border border-rose-500/20 dark:border-pink-500/20 flex items-center justify-center text-rose-700 dark:text-pink-400 shrink-0">
-              <Zap className="w-5 h-5" />
+
+          <div className="flex items-start gap-3.5">
+            <div className="w-9 h-9 border border-[#b38b4d]/40 dark:border-[#c29b62]/40 flex items-center justify-center text-[#8c6d3b] dark:text-[#c29b62] shrink-0 bg-[#f8f6f0] dark:bg-[#1a1816]">
+              <Clock className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-stone-900 dark:text-slate-100">Instant Checkout</h4>
-              <p className="text-xs text-stone-500 dark:text-slate-400">Encrypted 256-bit transactions</p>
+              <h4 className="text-xs uppercase tracking-wider font-bold text-[#1a1816] dark:text-[#f8f6f0]">Concierge Fragrance Advice</h4>
+              <p className="text-[11px] text-[#7a746e] dark:text-[#a6a096] mt-0.5">Consultations available Mon-Sat 9am-8pm</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-amber-600 dark:text-indigo-400" />
-          <span>© 2026 MATJARI STORE. Engineered with Next.js, Tailwind CSS & Abstract Factory Architecture.</span>
+      {/* Main Footer Links & Manifesto */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div className="md:col-span-4 space-y-4">
+          <Link href="/" className="inline-block">
+            <span className="font-serif tracking-[0.3em] text-2xl font-bold text-[#1a1816] dark:text-[#f8f6f0] uppercase">
+              ODORATUS
+            </span>
+          </Link>
+          <p className="font-serif italic text-sm text-[#8c6d3b] dark:text-[#c29b62]">
+            Haute Parfumerie &amp; Artisanal Flacons
+          </p>
+          <p className="text-xs text-[#7a746e] dark:text-[#a6a096] leading-relaxed max-w-sm">
+            Crafted for discerning connoisseurs who view scent as an intimate invisible architecture. Every flacon is hand-blended and numbered in limited harvests.
+          </p>
         </div>
-        <div className="flex items-center gap-6 font-semibold">
-          <a href="#" className="hover:text-stone-900 dark:hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-stone-900 dark:hover:text-white transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-stone-900 dark:hover:text-white transition-colors">Security</a>
+
+        <div className="md:col-span-2 space-y-3">
+          <h5 className="text-[11px] uppercase tracking-[0.2em] font-bold text-[#1a1816] dark:text-[#f8f6f0]">The Wardrobe</h5>
+          <ul className="space-y-2 text-xs">
+            <li><Link href="/shop" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">Shop All Fragrances</Link></li>
+            <li><Link href="/occasions" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">Occasions Curation</Link></li>
+            <li><Link href="/quiz" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors flex items-center gap-1"><Sparkles className="w-3 h-3 text-[#b38b4d]" /> AI Scent Consultation</Link></li>
+            <li><Link href="/shop" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">Discovery Wardrobe</Link></li>
+          </ul>
+        </div>
+
+        <div className="md:col-span-3 space-y-3">
+          <h5 className="text-[11px] uppercase tracking-[0.2em] font-bold text-[#1a1816] dark:text-[#f8f6f0]">Client Services</h5>
+          <ul className="space-y-2 text-xs">
+            <li><Link href="/track" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors flex items-center gap-1.5"><Truck className="w-3 h-3" /> Track Consignment</Link></li>
+            <li><Link href="/account" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">VIP Loyalty &amp; Rewards</Link></li>
+            <li><Link href="/about" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors">Grasse Atelier Heritage</Link></li>
+            <li><Link href="/admin" className="hover:text-[#b38b4d] dark:hover:text-[#c29b62] transition-colors text-[#8c6d3b]">Executive Admin Panel</Link></li>
+          </ul>
+        </div>
+
+        <div className="md:col-span-3 space-y-3">
+          <h5 className="text-[11px] uppercase tracking-[0.2em] font-bold text-[#1a1816] dark:text-[#f8f6f0]">Flagship Boutiques</h5>
+          <p className="text-xs leading-relaxed text-[#7a746e] dark:text-[#a6a096]">
+            Place Vendôme, Paris &middot; 5th Avenue, New York &middot; Mayfair, London
+          </p>
+          <div className="pt-2">
+            <span className="text-[10px] uppercase tracking-wider text-[#8c6d3b] dark:text-[#c29b62] block font-semibold">Concierge Line</span>
+            <span className="text-xs font-serif text-[#1a1816] dark:text-[#f8f6f0]">+33 (0)1 42 68 00 00</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-[#e8e2d4] dark:border-white/10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-[#b38b4d] dark:text-[#c29b62]" />
+          <span>&copy; {new Date().getFullYear()} ODORATUS MAISON DE PARFUM. All Rights Reserved.</span>
+        </div>
+        <div className="flex items-center gap-6 text-[11px] uppercase tracking-wider">
+          <Link href="/privacy" className="hover:text-[#1a1816] dark:hover:text-white transition-colors">Privacy</Link>
+          <Link href="/terms" className="hover:text-[#1a1816] dark:hover:text-white transition-colors">Terms of Sale</Link>
+          <Link href="/track" className="hover:text-[#1a1816] dark:hover:text-white transition-colors">Live Dispatch</Link>
         </div>
       </div>
     </footer>
