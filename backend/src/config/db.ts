@@ -13,8 +13,8 @@ export const connectDB = async (): Promise<void> => {
       const legacyIndex = indexes.find(
         (idx) => idx.name === 'orderId_1' || (idx.key && idx.key.orderId)
       );
-      if (legacyIndex) {
-        await ordersCollection.dropIndex(legacyIndex.name);
+      if (legacyIndex && legacyIndex.name) {
+        await ordersCollection.dropIndex(legacyIndex.name as string);
         console.log(`🧹 Dropped legacy index '${legacyIndex.name}' from orders collection`);
       }
     } catch {
